@@ -5,7 +5,7 @@ public class Person {
 	private int age;
 	
 	// default generator
-	//public Person() {}
+	public Person() {}
 	
 	// custom generator
 	public Person(String name, int age) {
@@ -31,6 +31,6 @@ public class Person {
 	
 	// showInfo method
 	public void showInfo() {
-		System.out.printf("Name: %s, Age: %d%n", name, age);
+		System.out.printf("Name: %s, Age: %d, ", name, age);
 	}
 }
