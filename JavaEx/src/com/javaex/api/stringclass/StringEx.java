@@ -4,7 +4,8 @@ public class StringEx {
 
 	public static void main(String[] args) {
 		// stringBasic();
-		usefulMethods();
+		// usefulMethods();
+		stringBufferEx();
 	}
 
 	private static void stringBasic() {
@@ -77,6 +78,28 @@ public class StringEx {
 		// -1 < 0 < 1
 		System.out.println("ABC".compareTo("ABD"));
 		System.out.println("ABC".compareTo("ABC"));
+	}
+	
+	private static void stringBufferEx() {
+		// Able to change internal data
+		StringBuffer sb = new StringBuffer("This");
 		
+		// string association
+		sb.append(" is pencil.");
+		
+		// insert
+		sb.insert(8, "my ");
+		
+		// replace
+		sb.replace(8, 10, "your ");
+		
+		System.out.println("Result : " + sb);
+		
+		// Change to Buffer length
+		sb.setLength(10);
+		System.out.println("Result : " + sb);
+		
+		String s = new StringBuffer("This").append(" is pencil.").insert(8, "my ").replace(8, 10, "your").toString();
+		System.out.println("Method chaining : " + s);
 	}
 }
