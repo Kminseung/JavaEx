@@ -16,7 +16,7 @@ public class MainThread {
 		// A ~ Z 출력
 		for(char c='A'; c<='Z'; c++) {
 			System.out.println("MainThread: " + c);
-			
+							
 			// 잠시 대기
 			try {
 				Thread.sleep(300);
@@ -25,7 +25,6 @@ public class MainThread {
 				e.printStackTrace();
 			}
 		}
-		
 	}
 
 }
