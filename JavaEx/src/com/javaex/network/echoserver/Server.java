@@ -29,47 +29,54 @@ public class Server {
 			System.out.println("SERVER : [연결 대기]");
 			
 			// 연결 대기
-			Socket socket = serverSocket.accept();
-			// 클라이언트 정보 확인
-			InetSocketAddress socketAddress = (InetSocketAddress)socket.getRemoteSocketAddress();	// 원격지 소켓의 주소 확인
-			System.out.println("SERVER : [클라이언트 연결 성공] " + "CLIENT : " + socketAddress.getAddress() + socketAddress.getPort());
-			
-			//  메시지 수신
-			InputStream is = socket.getInputStream();
-			Reader isr = new InputStreamReader(is);
-			BufferedReader br = new BufferedReader(isr);
-			
-			// Echo Back을 위한 OutputStream
-			OutputStream os = socket.getOutputStream();
-			Writer osw = new OutputStreamWriter(os, "UTF-8");
-			BufferedWriter bw = new BufferedWriter(osw);
-			
-			// 메시지 읽어오기
-			String message;
-			
 			while(true) {
-				message = br.readLine();
-				
-				if(message == null) {
-					System.out.println("SERVER : 접속 종료");
-					break;
-				}
-				
-				System.out.println("SERVER : [수신 메시지] : " + message);
-				
-				// Echo Back 메시지 전송
-				message = "Echo Back - " + message;
-				System.out.println("SERVER : [ECHO Back] : " + message);
-				bw.write(message);
-				bw.newLine();
-				bw.flush();
+				Socket socket = serverSocket.accept();
+				Thread thread = new ServerThread(socket);
+				thread.start();
 			}
 			
-			bw.close();
-			br.close();
+			// ----- Working Thread Logic 
+			// 클라이언트 정보 확인
+//			InetSocketAddress socketAddress = (InetSocketAddress)socket.getRemoteSocketAddress();	// 원격지 소켓의 주소 확인
+//			System.out.println("SERVER : [클라이언트 연결 성공] " + "CLIENT : " + socketAddress.getAddress() + socketAddress.getPort());
+//			
+//			//  메시지 수신
+//			InputStream is = socket.getInputStream();
+//			Reader isr = new InputStreamReader(is);
+//			BufferedReader br = new BufferedReader(isr);
+//			
+//			// Echo Back을 위한 OutputStream
+//			OutputStream os = socket.getOutputStream();
+//			Writer osw = new OutputStreamWriter(os, "UTF-8");
+//			BufferedWriter bw = new BufferedWriter(osw);
+//			
+//			// 메시지 읽어오기
+//			String message;
+//			
+//			while(true) {
+//				message = br.readLine();
+//				
+//				if(message == null) {
+//					System.out.println("SERVER : 접속 종료");
+//					break;
+//				}
+//				
+//				System.out.println("SERVER : [수신 메시지] : " + message);
+//				
+//				// Echo Back 메시지 전송
+//				message = "Echo Back - " + message;
+//				System.out.println("SERVER : [ECHO Back] : " + message);
+//				bw.write(message);
+//				bw.newLine();
+//				bw.flush();
+//			}
+//			
+//			bw.close();
+//			br.close();
+			// ----- Working Thread Logic End
 			
 			// 후처리
-			System.out.println("SERVER : [서버 종료]");
+			// System.out.println("SERVER : [서버 종료]");
 		}
 		catch(Exception e) {
 			e.printStackTrace();
