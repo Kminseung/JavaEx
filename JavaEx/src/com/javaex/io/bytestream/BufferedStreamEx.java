@@ -37,7 +37,7 @@ public class BufferedStreamEx {
 			System.out.println("복사 시작");
 			while((size=bis.read(data)) != -1) {
 				System.out.println(size + "바이트 복사");
-				bos.write(data);;
+				bos.write(data);
 			}
 			System.out.println("복사 완료");
 		}
